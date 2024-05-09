@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from 'styled-components'
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -37,4 +38,9 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textaxea, button {
     font: 400 1rem Nunito, sans-serif;
   }
+`
+
+export const Container = styled.div`
+  width: 54rem;
+  margin: 0 auto;
 `
