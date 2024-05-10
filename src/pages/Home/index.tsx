@@ -1,9 +1,9 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Post } from "./components/Post";
 import { UserInfo } from "./components/UserInfo";
-import axios from "axios";
+import { SearchBox } from "./components/SearchBox";
 import { PostList } from "./styles";
-
 
 interface Post {
   id: number,
@@ -16,10 +16,10 @@ export function Home() {
 
   const [posts, setPosts] = useState<Post[]>([])
 
-  useEffect(() => {
+  function fetchPosts(q: string = '') {
     axios({
       method: "get",
-      url: "https://api.github.com/search/issues?q=is:issue%20repo:rafael-acerqueira/github-blog"
+      url: `https://api.github.com/search/issues?q=${q}%20repo:rafael-acerqueira/github-blog`
     }).then(function (response) {
       const items = response.data.items.map(item => {
         return {
@@ -31,12 +31,21 @@ export function Home() {
       })
       setPosts(items)
     })
+  }
+
+  useEffect(() => {
+    fetchPosts()
   }, [])
 
+  function searchPosts(e) {
+    e.preventDefault()
+    fetchPosts(e.target.search.value)
+  }
 
   return (
     <div>
       <UserInfo />
+      <SearchBox search={searchPosts} count={posts.length} />
       <PostList>
         {
           posts.map(post =>
