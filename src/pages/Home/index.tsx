@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Post } from "./components/Post";
 import { UserInfo } from "./components/UserInfo";
 import { SearchBox } from "./components/SearchBox";
 import { PostList } from "./styles";
+
 
 interface Post {
   id: number,
@@ -23,7 +25,7 @@ export function Home() {
     }).then(function (response) {
       const items = response.data.items.map(item => {
         return {
-          id: item.id,
+          id: item.number,
           title: item.title,
           description: item.body,
           created_at: item.created_at
@@ -49,12 +51,13 @@ export function Home() {
       <PostList>
         {
           posts.map(post =>
-            <Post
-              key={post.id}
-              date={post.created_at}
-              title={post.title}
-              description={post.description}
-            />
+            <Link key={post.id} to={`posts/${post.id}`}>
+              <Post
+                date={post.created_at}
+                title={post.title}
+                description={post.description}
+              />
+            </Link>
           )
         }
       </PostList>

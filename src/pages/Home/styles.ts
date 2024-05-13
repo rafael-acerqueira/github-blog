@@ -4,4 +4,9 @@ export const PostList = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 2rem;
+
+  a {
+    all: unset;
+    cursor: pointer;
+  }
 `

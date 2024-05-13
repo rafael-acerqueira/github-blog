@@ -12,6 +12,7 @@ export const Title = styled.div`
 `
 
 export const Name = styled.h1`
+  color: var(--title);
   font-size: 1.25rem;
   margin-bottom: 1.25rem;
 `
